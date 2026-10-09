@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RemateCheck – Investiga antes de ofertar</title>
+<meta name="description" content="RemateCheck reúne en un solo lugar lo que debes revisar antes de ofertar por un vehículo en un remate judicial en Perú. Herramienta informativa independiente.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;800&family=Source+Serif+4:wght@600;700&display=swap">
+<style>
+:root{--bg:#f3f5f8;--card:#fff;--ink:#14213d;--mut:#5b6678;--line:#dde2ea;--navy:#0b2447;--ok:#1b8a4b;--okb:#e5f5ec;--warn:#9a6700;--warnb:#fff6d6;--bad:#b42318;--badb:#fde8e6;--acc:#f5b700;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1424;--card:#142038;--ink:#e8edf5;--mut:#9aa7bd;--line:#26365a;--okb:#0f2f20;--warnb:#3a2f08;--badb:#3d1512;--ok:#4cc982;--warn:#f5c542;--bad:#ff8277}}
+:root[data-theme="dark"]{--bg:#0c1424;--card:#142038;--ink:#e8edf5;--mut:#9aa7bd;--line:#26365a;--okb:#0f2f20;--warnb:#3a2f08;--badb:#3d1512;--ok:#4cc982;--warn:#f5c542;--bad:#ff8277}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'Public Sans',system-ui,sans-serif}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;line-height:1.2;margin:0 0 .5rem}
+a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:5}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;flex-wrap:wrap}
+.logo{font:700 1.3rem 'Source Serif 4',serif;text-decoration:none}.logo b{color:var(--acc)}
+nav{display:flex;gap:2px;flex-wrap:wrap}nav a{padding:8px 10px;text-decoration:none;font-size:.9rem;border-radius:6px;color:#dbe4f3}
+nav a:hover,nav a.on{background:#ffffff1f;color:#fff}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.demo{background:var(--warnb);color:var(--warn);border:1px solid var(--acc);border-radius:10px;padding:10px 14px;font-size:.92rem;font-weight:600}
+.hero{background:var(--navy);color:#fff;padding:44px 0 36px}
+.hero h1{font-size:clamp(1.9rem,6vw,3rem);max-width:15ch}.hero p{color:#c6d3ea;max-width:52ch}
+.slogan{color:var(--acc);font-weight:600;margin-bottom:6px}
+.search{display:flex;gap:10px;margin:22px 0 14px;flex-wrap:wrap}
+.search input{flex:1 1 220px;font:700 1.4rem 'Public Sans';letter-spacing:.12em;text-transform:uppercase;padding:14px 16px;border-radius:10px;border:2px solid transparent;background:#fff;color:#0b2447}
+.btn{background:var(--acc);color:#1a1300;border:0;border-radius:10px;font:700 1rem 'Public Sans';padding:14px 22px;cursor:pointer}
+.btn.sec{background:transparent;border:2px solid var(--line);color:var(--ink)}
+.hint{font-size:.85rem;color:#c6d3ea}.hint button{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;text-decoration:underline;padding:0 4px}
+.err{color:#ffb4ab;font-weight:600;min-height:1.4em}
+main{padding:26px 0 50px}section.pg{padding:8px 0}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;border-left:6px solid var(--line)}
+.card.ok{border-left-color:var(--ok)}.card.warn{border-left-color:var(--acc)}.card.bad{border-left-color:var(--bad)}
+.card h3{font-size:1.05rem;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.pill{font:600 .75rem 'Public Sans';padding:3px 9px;border-radius:99px;white-space:nowrap}
+.pill.ok{background:var(--okb);color:var(--ok)}.pill.warn{background:var(--warnb);color:var(--warn)}.pill.bad{background:var(--badb);color:var(--bad)}
+dl{margin:8px 0 0;display:grid;grid-template-columns:minmax(100px,38%) 1fr;gap:5px 10px;font-size:.92rem}
+dt{color:var(--mut)}dd{margin:0;font-weight:600;word-break:break-word}
+.note{font-size:.82rem;color:var(--mut);margin-top:10px}
+.wide{grid-column:1/-1}
+.rem{border:2px solid var(--navy);border-left-width:6px;background:linear-gradient(var(--card),var(--card))}
+.rem h3{font-size:1.3rem}
+.head{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px}
+.plate{display:inline-block;border:3px solid #111;border-radius:8px;background:#fff;color:#111;font:800 1.7rem 'Public Sans';letter-spacing:.1em;padding:2px 14px}
+.risk{text-align:center;min-width:170px}.risk .n{font:700 2.4rem 'Source Serif 4',serif;line-height:1}
+.bar{height:10px;border-radius:9px;background:var(--line);overflow:hidden;margin:6px 0}.bar i{display:block;height:100%}
+.alerts{display:grid;gap:8px;margin:14px 0}
+.al{border-radius:10px;padding:10px 14px;font-size:.92rem}.al b{display:block}
+.al.ok{background:var(--okb);color:var(--ok)}.al.warn{background:var(--warnb);color:var(--warn)}.al.bad{background:var(--badb);color:var(--bad)}
+.tl{list-style:none;margin:10px 0 0;padding:0 0 0 18px;border-left:3px solid var(--line)}
+.tl li{position:relative;padding:0 0 12px 8px;font-size:.92rem}.tl li:before{content:"";position:absolute;left:-26px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--navy);border:2px solid var(--card)}
+.tl li.cur:before{background:var(--acc)}.tl small{display:block;color:var(--mut)}
+.chk label{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer}.chk input{width:20px;height:20px;accent-color:var(--ok)}
+.docs{display:grid;gap:10px}.doc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}.doc b{display:block}
+.photos{display:flex;gap:8px;margin-top:8px}.photos div{flex:1;aspect-ratio:4/3;border:2px dashed var(--line);border-radius:8px;display:grid;place-items:center;font-size:.72rem;color:var(--mut);text-align:center}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+.legal{background:var(--navy);color:#c6d3ea;padding:26px 0;font-size:.85rem}.legal p{margin:0 0 8px}
+.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:10px}.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 14px 14px 56px;position:relative}
+.steps li:before{content:counter(s);position:absolute;left:14px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700}
+.tag{font-size:.75rem;background:var(--line);padding:2px 8px;border-radius:99px;margin-left:6px;color:var(--mut)}
+pre{background:#0b1220;color:#d6e2ff;padding:14px;border-radius:10px;overflow-x:auto;font-size:.8rem}
+@media(max-width:560px){dl{grid-template-columns:1fr 1fr}.search .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="#/">Remate<b>Check</b></a>
+<nav aria-label="Principal"><a href="#/">Inicio</a><a href="#/como-funciona">Cómo funciona</a><a href="#/fuentes">Fuentes</a><a href="#/faq">FAQ</a><a href="#/planes">Planes</a><a href="#/admin">Admin</a></nav></div></header>
+<div id="app"></div>
+<footer class="legal"><div class="wrap">
+<p><b>RemateCheck</b> – Investiga antes de ofertar.</p>
+<p>RemateCheck es una herramienta informativa independiente. No pertenece ni representa a SUNARP, SAT, SUTRAN, MTC, Poder Judicial ni ninguna entidad pública.</p>
+<p>Los resultados deben ser verificados directamente en las fuentes oficiales correspondientes antes de realizar una oferta.</p></div></footer>
+
+<script>
+/* ============ CAPA 1 · BASE DE DATOS (esquema preparado; hoy en memoria) ============
+ Tablas futuras: vehiculos, remates, expedientes, propietarios, gravamenes, documentos,
+ fotos, alertas, fuentes, usuarios, planes. Ver página #/admin. */
+const DB = {
+ vehiculos:{
+  "ABC123":{placa:"ABC-123",marca:"Toyota",modelo:"Yaris",anio:2018,color:"Blanco",tipo:"Sedán",comb:"Gasolina",vin:"DEMO-VIN-0000000001",motor:"DEMO-MOT-1NZ0001",
+   registral:{titular:"Demo Inversiones S.A.C.",estado:"Activo",partida:"DEMO-50012345",pend:"1 título en trámite (DEMO)",obs:"Sin observaciones adicionales (DEMO)"},
+   grav:{garantias:"1 garantía mobiliaria (DEMO)",embargos:"1 embargo en forma de inscripción (DEMO)",cautelares:"Ninguna",otros:"Ninguno"},
+   owners:[["Propietario 1 (DEMO)","2018 – 2020"],["Propietario 2 (DEMO)","2020 – 2022"],["Propietario 3 (DEMO)","2022 – 2024"],["Demo Inversiones S.A.C.","2024 – actual"]],
+   multas:{n:3,monto:"S/ 1,284.00",estado:"Pendiente de pago",ent:"SAT Lima (DEMO)"},
+   captura:false,soat:{estado:"Vencido",vig:"Venció 12/03/2026",cia:"Compañía DEMO"},
+   rt:{estado:"Por vencer",fecha:"30/11/2026",tipo:"Periódica (DEMO)"},
+   sutran:{inf:"1 infracción (DEMO)",exp:"1 expediente abierto (DEMO)",obs:"Verificar en SUTRAN"},
+   gnv:{conv:"Sí (DEMO)",info:"Certificado GNV vigente hasta 2027 (DEMO)",obs:"Revisar cilindro y chip"},
+   remate:{exp:"01234-2025-0-1801-JR-CI-DEMO",juz:"5.º Juzgado Civil – DEMO",dist:"Lima",dem:"Banco DEMO S.A.",ddo:"Demo Inversiones S.A.C.",fecha:"28/10/2026 10:00",conv:"Primera convocatoria",base:"S/ 24,500.00",dep:"10% del valor de tasación (DEMO)",lugar:"Depósito judicial DEMO, Callao",estado:"Programado",doc:"Resolución de remate (DEMO, sin archivo)"},riesgo:7},
+  "XYZ789":{placa:"XYZ-789",marca:"Hyundai",modelo:"Accent",anio:2020,color:"Gris",tipo:"Sedán",comb:"Gasolina",vin:"DEMO-VIN-0000000002",motor:"DEMO-MOT-G4L0002",
+   registral:{titular:"Persona Natural DEMO",estado:"Activo",partida:"DEMO-50099871",pend:"Ninguno",obs:"Sin observaciones (DEMO)"},
+   grav:{garantias:"Ninguna",embargos:"Ninguno",cautelares:"Ninguna",otros:"Ninguno"},
+   owners:[["Propietario 1 (DEMO)","2020 – 2023"],["Persona Natural DEMO","2023 – actual"]],
+   multas:{n:0,monto:"S/ 0.00",estado:"Sin deuda",ent:"SAT (DEMO)"},
+   captura:false,soat:{estado:"Vigente",vig:"Hasta 09/2027",cia:"Compañía DEMO"},
+   rt:{estado:"Vigente",fecha:"05/2027",tipo:"Periódica (DEMO)"},
+   sutran:{inf:"Ninguna",exp:"Ninguno",obs:"—"},gnv:{conv:"No (DEMO)",info:"No aplica",obs:"—"},
+   remate:{exp:"05678-2026-0-1801-JR-CI-DEMO",juz:"2.º Juzgado Comercial – DEMO",dist:"Lima Norte",dem:"Financiera DEMO",ddo:"Persona Natural DEMO",fecha:"12/11/2026 11:00",conv:"Segunda convocatoria",base:"S/ 41,000.00",dep:"10% del valor de tasación (DEMO)",lugar:"Almacén DEMO, Los Olivos",estado:"Programado",doc:"Bases del remate (DEMO, sin archivo)"},riesgo:2},
+  "DEF456":{placa:"DEF-456",marca:"Kia",modelo:"Rio",anio:2016,color:"Rojo",tipo:"Hatchback",comb:"GNV",vin:"DEMO-VIN-0000000003",motor:"DEMO-MOT-K3B0003",
+   registral:{titular:"Demo Transportes E.I.R.L.",estado:"Con restricciones (DEMO)",partida:"DEMO-50077123",pend:"2 títulos pendientes (DEMO)",obs:"Discrepancia de titularidad (DEMO)"},
+   grav:{garantias:"2 garantías (DEMO)",embargos:"2 embargos (DEMO)",cautelares:"1 medida cautelar (DEMO)",otros:"Ninguno"},
+   owners:[["Propietario 1 (DEMO)","2016 – 2019"],["Propietario 2 (DEMO)","2019 – 2021"],["Demo Transportes E.I.R.L.","2021 – actual"]],
+   multas:{n:8,monto:"S/ 3,950.00",estado:"Pendiente / en cobranza",ent:"SAT Callao (DEMO)"},
+   captura:true,soat:{estado:"Vencido",vig:"Venció 2025",cia:"Compañía DEMO"},
+   rt:{estado:"Vencida",fecha:"01/2025",tipo:"Periódica (DEMO)"},
+   sutran:{inf:"3 infracciones (DEMO)",exp:"2 expedientes (DEMO)",obs:"Verificar en SUTRAN"},
+   gnv:{conv:"Sí (DEMO)",info:"Certificado vencido (DEMO)",obs:"Requiere inspección"},
+   remate:{exp:"09999-2024-0-0701-JR-CI-DEMO",juz:"3.º Juzgado Civil – DEMO",dist:"Callao",dem:"Caja DEMO",ddo:"Demo Transportes E.I.R.L.",fecha:"05/11/2026 09:30",conv:"Tercera convocatoria",base:"S/ 9,800.00",dep:"10% del valor de tasación (DEMO)",lugar:"Depósito DEMO, Callao",estado:"Suspendido (DEMO)",doc:"Resolución (DEMO, sin archivo)"},riesgo:9}
+ }
+};
+
+/* ============ CAPA 2 · FUENTES EXTERNAS / API (adaptadores) ============
+ Estado honesto de las fuentes (oct-2026):
+ - SUNARP/SAT/SUTRAN/PJ: SIN API publica gratuita. SUNARP vende Web Services (SOAP) solo con
+   contrato ante la Zona Registral; SAT/SUTRAN/PJ son webs con CAPTCHA (verificacion manual).
+ - MTC: endpoint JSON no oficial (apps5.mineco.gob.pe/webservicessic); puede fallar por CORS o cambios.
+ - Terceros de pago (JSON.pe, PlacApi): entregan JSON estable por API key. Configura tus claves en #/admin. */
+const FUENTES={
+ mtc:{nombre:"MTC",url:"https://www.mtc.gob.pe/",servicio:"Consulta vehicular (marca, modelo, anio, color, VIN)",integracion:"Endpoint JSON no oficial (apps5.mineco.gob.pe/webservicessic). Puede cambiar o bloquearse; sin garantia.",tipo:"nooficial"},
+ sunarp:{nombre:"SUNARP",url:"https://www.sunarp.gob.pe/",servicio:"Boleta Informativa Vehicular / partida registral / gravamenes",integracion:"Sin API publica. Web Services SUNARP (SOAP) solo mediante contrato con la Zona Registral; la web publica usa CAPTCHA.",tipo:"contrato"},
+ sat:{nombre:"SAT",url:"https://www.sat.gob.pe/",servicio:"Papeletas y obligaciones segun jurisdiccion (Lima/Callao)",integracion:"Sin API publica. Consulta web con CAPTCHA; para volumen se gestiona acceso directo con cada SAT.",tipo:"manual"},
+ sutran:{nombre:"SUTRAN",url:"https://www.sutran.gob.pe/",servicio:"Infracciones y papeletas en carreteras",integracion:"Sin API publica documentada. Consulta web con CAPTCHA.",tipo:"manual"},
+ pj:{nombre:"Poder Judicial",url:"https://cej.pj.gob.pe/cej/",servicio:"Estado del expediente del remate",integracion:"Portal CEJ de consulta de expedientes; sin API publica, uso web.",tipo:"manual"},
+ jsonpe:{nombre:"JSON.pe (tercero)",url:"https://json.pe/api-placa",servicio:"Ficha vehicular por placa (marca, modelo, serie, color, motor)",integracion:"API REST de pago con token Bearer. Plan gratis: 100 creditos/30 dias. Configura tu token en #/admin.",tipo:"apikey"},
+ placapi:{nombre:"PlacApi (tercero)",url:"https://placapi.com/api-consulta-vehicular-peru",servicio:"Ficha SUNARP por placa (marca, linea, anio, color, VIN)",integracion:"API REST de pago con x-api-key; resuelve el CAPTCHA del registro y entrega JSON. Configura tu key en #/admin.",tipo:"apikey"}
+};
+const PROV_STATUS={}; // id -> ultimo estado conocido
+const cfg=(k,d="")=>localStorage.getItem("rc_"+k)||d;
+const setCfg=(k,v)=>v?localStorage.setItem("rc_"+k,v):localStorage.removeItem("rc_"+k);
+
+const MtcProvider={id:"mtc",nombre:"MTC (no oficial)",estado:"sin consultar",
+ async getVehiculo(p){
+  const target="https://apps5.mineco.gob.pe/webservicessic/api/ConsultaVehiculo?placa="+encodeURIComponent(p);
+  const px=[u=>"https://api.allorigins.win/raw?url="+encodeURIComponent(u),u=>"https://corsproxy.io/?url="+encodeURIComponent(u)];
+  for(const f of px){
+   try{const c=new AbortController();const t=setTimeout(()=>c.abort(),8000);
+    const r=await fetch(f(target),{signal:c.signal});clearTimeout(t);
+    if(!r.ok)continue;const j=await r.json();
+    if(j&&(j.Placa||j.placa)){this.estado="ok";return{__parcial:true,placa:j.Placa||j.placa,marca:j.Marca||j.marca||"",modelo:j.Modelo||j.modelo||"",anio:j.AnioFabricacion||j.Anio||j.anio||"",color:j.Color||j.color||"",vin:j.VIN||j.NroSerie||j.Serie||"",comb:j.Combustible||j.combustible||"",motor:j.Motor||j.motor||""};}
+   }catch(e){}
+  }
+  this.estado="fallo (CORS/cambio de endpoint)";return null;
+ }};
+
+const JsonPeProvider={id:"jsonpe",nombre:"JSON.pe",estado:"sin API key",
+ async getVehiculo(p){
+  const k=cfg("jsonpe");if(!k){this.estado="sin API key";return null}
+  try{const r=await fetch("https://api.json.pe/api/placa",{method:"POST",headers:{Authorization:"Bearer "+k,"Content-Type":"application/json"},body:JSON.stringify({placa:p})});
+   if(r.status===401||r.status===403){this.estado="key invalida";return null}
+   if(!r.ok){this.estado="error HTTP "+r.status;return null}
+   const j=await r.json();this.estado="ok";const d=j.data||j;
+   return{__parcial:true,placa:d.placa||p,marca:d.marca||"",modelo:d.modelo||d.linea||"",anio:d.anio||d.anio_fabricacion||"",color:d.color||"",vin:d.serie||d.vin||"",motor:d.motor||"",comb:d.combustible||""};
+  }catch(e){this.estado="fallo de red";return null}
+ }};
+
+const PlacApiProvider={id:"placapi",nombre:"PlacApi",estado:"sin API key",
+ async getVehiculo(p){
+  const k=cfg("placapi");if(!k){this.estado="sin API key";return null}
+  try{const r=await fetch("https://api.placapi.com/api/vehiculo-pe",{method:"POST",headers:{"x-api-key":k,"Content-Type":"application/json"},body:JSON.stringify({placa:p})});
+   if(r.status===401||r.status===403){this.estado="key invalida";return null}
+   if(r.status===404){this.estado="sin datos (404)";return null}
+   if(!r.ok){this.estado="error HTTP "+r.status;return null}
+   const j=await r.json();this.estado="ok";
+   return{__parcial:true,placa:j.placa||p,marca:j.marca||"",modelo:j.linea||j.modelo||"",anio:j.anio||j.anioModelo||"",color:j.color||"",vin:j.vin||""};
+  }catch(e){this.estado="fallo de red";return null}
+ }};
+
+const DemoProvider={id:"demo",nombre:"Datos DEMO",real:false,async getVehiculo(p){return DB.vehiculos[p]||null}};
+const LIVE_PROVIDERS=[JsonPeProvider,PlacApiProvider,MtcProvider];
+
+/* ============ CAPA 3 · BACKEND (servicio) ============
+ Futuro: POST /api/investigar {placa} → agrega proveedores, calcula alertas y riesgo en servidor. */
+const normPlaca=s=>s.toUpperCase().replace(/[^A-Z0-9]/g,"");
+const placaValida=s=>/^[A-Z0-9]{3}[0-9]{3}$/.test(s)||/^[A-Z][0-9A-Z]{2}[0-9]{3}$/.test(s);
+function esqueleto(pl){return{placa:pl,marca:"—",modelo:"—",anio:"—",color:"—",tipo:"—",comb:"—",vin:"—",motor:"—",registral:{titular:"—",estado:"Sin datos",partida:"—",pend:"—",obs:"Verificar en SUNARP"},grav:{garantias:"—",embargos:"—",cautelares:"—",otros:"—"},owners:[["Sin historial disponible","—"]],multas:{n:0,monto:"—",estado:"—",ent:"—"},captura:false,soat:{estado:"—",vig:"—",cia:"—"},rt:{estado:"—",fecha:"—",tipo:"—"},sutran:{inf:"—",exp:"—",obs:"—"},gnv:{conv:"—",info:"—",obs:"—"},remate:{exp:"—",juz:"—",dist:"—",dem:"—",ddo:"—",fecha:"—",conv:"—",base:"—",dep:"—",lugar:"—",estado:"—",doc:"—"},riesgo:5}}
+async function investigar(raw){
+ const p=normPlaca(raw);
+ if(!placaValida(p))return{error:"Placa no válida. Usa 3 caracteres y 3 números, por ejemplo ABC-123."};
+ return {v:esqueleto(p)};
+}
+
+function alertas(v){
+ const a=[];
+ const g=v.grav;const vac=s=>s==="—"||s==="";
+ if(vac(g.embargos)||vac(g.garantias))a.push(["warn","Gravámenes sin datos","Esta fuente no entrega gravámenes: revisa la boleta informativa SUNARP y la partida registral antes de ofertar."]);
+ else if(/^(Ninguna?|Ninguno)$/.test(g.embargos)&&/^Ninguna?$/.test(g.garantias))a.push(["ok","Sin gravámenes en la consulta DEMO","Igual verifica la partida registral."]);
+ else a.push(["bad","Gravamen encontrado","Se recomienda revisar la boleta informativa vehicular y la partida registral antes de ofertar."]);
+ a.push(v.captura?["bad","Orden de captura","Alerta importante: confirma en fuentes oficiales y consulta con un abogado."]:["ok","Orden de captura","No encontrada en la consulta DEMO."]);
+ if(v.multas.n>0)a.push([v.multas.n>4?"bad":"warn","Papeletas pendientes",v.multas.n+" papeleta(s), "+v.multas.monto+". Verifica con el SAT correspondiente."]);
+ if(v.soat.estado!=="Vigente"&&v.soat.estado!=="—")a.push(["warn","SOAT "+v.soat.estado.toLowerCase(),"Requiere verificación."]);
+ if(v.rt.estado!=="Vigente"&&v.rt.estado!=="—")a.push(["warn","Revisión técnica "+v.rt.estado.toLowerCase(),"Requiere verificación."]);
+ if(/Suspend/.test(v.remate.estado))a.push(["bad","Remate suspendido","Confirma el estado en el expediente."]);
+ if(v.registral.pend!=="Ninguno"&&v.registral.pend!=="—")a.push(["warn","Títulos pendientes","Revisa la partida registral."]);
+ return a;
+}
+
+/* ============ CAPA 4 · FRONTEND (componentes reutilizables) ============ */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const LV={ok:"🟢 Sin alerta",warn:"🟡 Verificar",bad:"🔴 Alerta"};
+const Card=(t,lv,rows,note="",cls="")=>`<article class="card ${lv} ${cls}"><h3>${t}<span class="pill ${lv}">${LV[lv]}</span></h3><dl>${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join("")}</dl>${note?`<p class="note">${note}</p>`:""}</article>`;
+const lvl=(c,w)=>c?"bad":w?"warn":"ok";
+const FuentesBox=()=>`<h2 style="margin-top:28px">Fuentes y verificación oficial</h2><div class="docs">${Object.entries(FUENTES).map(([k,f])=>{const st=PROV_STATUS[k];const b=f.tipo==="apikey"?(st==="ok"?["ok","API en vivo"]:st&&st.indexOf("sin")<0?["bad",st]:["warn","Configura API key en Admin"]):f.tipo==="nooficial"?(st==="ok"?["ok","En vivo (no oficial)"]:["bad","No verificable (CORS)"]):f.tipo==="contrato"?["warn","Requiere contrato"]:["warn","Manual (CAPTCHA)"];return `<div class="doc"><b>${f.nombre}<span class="pill ${b[0]}" style="margin-left:8px">${b[1]}</span></b>${f.servicio}<br><span class="note">${f.integracion}</span><br><a href="${f.url}" target="_blank" rel="noopener">Abrir fuente oficial ↗</a></div>`}).join("")}</div>`;
+
+const CONSULTAS_EXTERNAS=[
+ {nombre:"Datos del vehículo y titular",fuente:"SUNARP",url:"https://consultavehicular.sunarp.gob.pe/consulta-vehicular/",detalle:"Marca, modelo, motor, VIN y titular actual. Completa la verificación del portal."},
+ {nombre:"SOAT",fuente:"APESEG",url:"https://webapp.apeseg.org.pe/consulta-soat/",detalle:"Consulta la vigencia del seguro. El formulario incluye CAPTCHA."},
+ {nombre:"Revisión técnica",fuente:"MTC",url:"https://sistemas.mtc.gob.pe/aplicaciones/consulta-de-inspeccion-tecnica-vehicular/",detalle:"Abre el acceso del MTC a la consulta CITV. Sigue las instrucciones del portal."},
+ {nombre:"Papeletas y captura en Lima",fuente:"SAT Lima",url:"https://www.sat.gob.pe/",detalle:"Entra a Consultas en línea y elige papeletas u orden de captura por placa. Cobertura de Lima."},
+ {nombre:"Papeletas de transporte",fuente:"SUTRAN",url:"https://www.sutran.gob.pe/",detalle:"Busca la consulta de papeletas en el portal de SUTRAN. Su cobertura es distinta de la municipal."},
+ {nombre:"Historial y gravámenes",fuente:"SUNARP · servicio adicional",url:"https://sprl.sunarp.gob.pe/",detalle:"La consulta básica no informa gravámenes. Este servicio puede requerir cuenta y pago."}
+];
+async function copiarPlacaExterna(placa){
+ try{
+  if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(placa);return true;}
+ }catch(e){}
+ const input=document.getElementById("placa-copia");
+ if(input){input.focus();input.select();try{return document.execCommand("copy");}catch(e){}}
+ return false;
+}
+function Ficha(v){
+ const placa=esc(v.placa);
+ return `<div class="head"><div><span class="plate">${placa}</span><h2>Investiga esta placa</h2><p>Elige la consulta que necesitas.</p></div></div>
+ <div class="demo"><b>Consultas externas</b><br>Cada botón intenta copiar la placa y abre el portal correspondiente en otra pestaña. Pégala con Ctrl + V y completa su formulario. Los resultados se muestran en el portal externo; no se importan a esta ficha.</div>
+ <div style="margin:18px 0"><label for="placa-copia">Tu placa para copiar</label><br><input id="placa-copia" value="${placa}" readonly style="padding:12px;font-size:20px;max-width:180px"><button class="btn" id="copiar-placa" type="button">Copiar placa</button><p id="copia-estado" role="status" aria-live="polite">Si la copia automática falla, selecciona la placa y pulsa Ctrl + C.</p></div>
+ <div class="grid">${CONSULTAS_EXTERNAS.map((c,i)=>`<article class="card"><h3>${c.nombre}</h3><p><b>${c.fuente}</b></p><p>${c.detalle}</p><a class="btn" href="${c.url}" target="_blank" rel="noopener noreferrer" data-consulta="${i}">Copiar placa y abrir ↗</a><p class="note">Consulta externa · no se ha realizado ninguna verificación.</p></article>`).join("")}</div>${Checklist()}`;
+}
+function activarConsultasExternas(placa){
+ const msg=()=>document.getElementById("copia-estado");
+ const copy=async()=>{const ok=await copiarPlacaExterna(placa);if(msg())msg().textContent=ok?"Placa copiada: "+placa+". Pégala en el portal con Ctrl + V.":"Selecciona la placa y pulsa Ctrl + C; luego pégala en el portal externo.";};
+ document.getElementById("copiar-placa").onclick=copy;
+ document.querySelectorAll("[data-consulta]").forEach(link=>link.addEventListener("click",()=>{copy();}));
+}
+
+const CHK=["Verifiqué la placa","Revisé la situación registral","Revisé gravámenes","Revisé embargos","Revisé papeletas","Revisé orden de captura","Revisé SOAT","Revisé revisión técnica","Revisé el expediente del remate","Revisé las condiciones de la convocatoria","Verifiqué dónde se encuentra el vehículo","Revisé físicamente el vehículo cuando sea posible"];
+const Checklist=()=>`<h2 style="margin-top:28px">¿Ya revisaste todo?</h2><div class="card chk"><div id="prog" style="font-weight:700">0% completado</div><div class="bar"><i id="pbar" style="width:0;background:var(--ok)"></i></div>${CHK.map((c,i)=>`<label><input type="checkbox" data-c> ${c}</label>`).join("")}</div>`;
+const DOCS=[["Boleta Informativa Vehicular","Resume los datos registrales del vehículo, sus gravámenes y limitaciones vigentes."],["Historial de dominio","Muestra quiénes han sido propietarios y cómo cambió la titularidad."],["Partida registral","Es el expediente del vehículo en el registro: títulos, actos y cargas inscritas."],["Bases/condiciones del remate","Explican requisitos, depósito, forma de pago y reglas para participar."],["Resolución o documento judicial","Confirma qué se ordenó rematar, en qué proceso y en qué estado está."],["Acta/documento de adjudicación","Cuando corresponda, acredita que el bien te fue adjudicado."]];
+const Docs=()=>`<h2 style="margin-top:28px">Documentos que conviene revisar</h2><div class="docs">${DOCS.map(d=>`<div class="doc"><b>📄 ${d[0]}</b>${d[1]}</div>`).join("")}</div>`;
+
+/* ============ PÁGINAS ============ */
+const FAQ=[["¿RemateCheck es SUNARP?","No. Es una herramienta informativa independiente, sin relación con SUNARP ni otra entidad pública."],["¿La información garantiza que el vehículo está libre de problemas?","No. Hoy los datos son de ejemplo, y aun con datos reales debes verificar en las fuentes oficiales."],["¿Puedo confiar en el índice de riesgo?","Por ahora es solo demostrativo. En el futuro será una guía, nunca una garantía ni asesoría legal."],["¿Qué es un gravamen?","Una carga sobre el vehículo, como una garantía mobiliaria o un embargo, que puede limitar su transferencia o afectar a quien lo adquiere."],["¿Qué es una orden de captura?","Una orden para que la autoridad intervenga el vehículo. Si existe, puede impedir que lo uses o lo transfieras."],["¿Qué debo revisar antes de participar en un remate?","Partida registral, gravámenes, papeletas, SOAT, revisión técnica, expediente, bases del remate y estado físico del vehículo. Usa el checklist de la ficha."],["¿Puedo revisar cualquier vehículo?","Solo las placas con ficha DEMO (ABC-123, XYZ-789, DEF-456) muestran todo el ejemplo. Con una API key de terceros configurada en #/admin, la sección Identificación se llena con datos reales de cualquier placa."],["¿La página compra o vende vehículos?","No. Solo ayuda a ordenar la información que debes revisar antes de ofertar."]];
+const SRC=[["SUNARP","Información registral y vehicular."],["SAT","Papeletas y obligaciones según jurisdicción."],["SUTRAN","Infracciones y consultas correspondientes."],["MTC","Información vehicular disponible mediante sus servicios."],["Documentación judicial","Información específica del expediente y remate."]];
+const PLANS=[["Investigación básica","Gratis","Disponible (DEMO)"],["Investigación completa","Pago","Próximamente"],["Informe PDF","Pago","Próximamente"],["Alertas de nuevos remates","Suscripción","Próximamente"],["Cuenta Premium","Herramientas adicionales","Próximamente"]];
+const ADM=["Agregar remates","Editar vehículos","Subir documentos","Agregar fotografías","Registrar expedientes","Cambiar estado del remate","Agregar fuentes","Marcar alertas"];
+
+const Pages={
+ "/":()=>`<section class="hero"><div class="wrap"><p class="slogan">Investiga antes de ofertar.</p><h1>Investiga un vehículo antes de rematarlo</h1><p>Reúne en un solo lugar la información que debes revisar antes de ofertar por un vehículo.</p>
+ <form class="search" id="f" role="search"><label for="pl" style="position:absolute;left:-9999px">Ingresa la placa</label><input id="pl" placeholder="Ingresa la placa · ABC-123" maxlength="8" autocomplete="off" inputmode="text"><button class="btn">Investigar placa</button></form>
+ <div class="err" id="er" role="alert"></div><p class="hint">Prueba con: <button type="button" data-p="ABC-123">ABC-123</button><button type="button" data-p="XYZ-789">XYZ-789</button><button type="button" data-p="DEF-456">DEF-456</button></p>
+ <div class="demo">⚠️ DEMO: Los resultados actuales son datos de ejemplo y no constituyen una consulta registral oficial.</div></div></section>
+ <main><div class="wrap" id="res"><p style="color:var(--mut)">Ingresa una placa para investigar en las fuentes externas. Accesos a consultas externas por placa.</p></div></main>`,
+ "/como-funciona":()=>pg("Cómo funciona",`<ol class="steps"><li><b>Introduce la placa.</b><br>Escribe la placa del vehículo del remate.</li><li><b>Revisa la información disponible.</b><br>Verás una ficha con tarjetas por tema.</li><li><b>Identifica alertas.</b><br>🟢 sin alerta, 🟡 requiere verificación, 🔴 alerta importante.</li><li><b>Revisa los documentos.</b><br>Te indicamos cuáles conviene pedir y para qué sirven.</li><li><b>Evalúa el vehículo antes de ofertar.</b><br>Completa el checklist y verifica en fuentes oficiales.</li></ol>`),
+ "/fuentes":()=>pg("Fuentes",`<div class="demo" style="margin-bottom:14px">⚠️ SUNARP, SAT, SUTRAN y Poder Judicial NO ofrecen API pública gratuita. SUNARP vende Web Services SOAP solo con contrato; SAT/SUTRAN/PJ son webs con CAPTCHA. Las integraciones automáticas posibles hoy: APIs de pago de terceros (JSON.pe, PlacApi) y un endpoint no oficial del MTC que puede dejar de funcionar. Configura tus claves en #/admin.</div><div class="docs">${Object.entries(FUENTES).map(([k,f])=>{const st=PROV_STATUS[k]||"sin consultar";const b=f.tipo==="apikey"?(st==="ok"?["ok","API en vivo"]:["warn","Requiere API key"]):f.tipo==="nooficial"?(st==="ok"?["ok","No oficial, en vivo"]:["bad","No verificable desde navegador"]):f.tipo==="contrato"?["warn","Requiere contrato"]:["warn","Manual (CAPTCHA)"];return `<div class="doc"><b>${f.nombre}<span class="pill ${b[0]}" style="margin-left:8px">${b[1]}</span></b>${f.servicio}<br><span class="note">${f.integracion}</span><br><a href="${f.url}" target="_blank" rel="noopener">Verificar manualmente en ${f.nombre} ↗</a></div>`}).join("")}</div>`),
+ "/faq":()=>pg("Preguntas frecuentes",FAQ.map(f=>`<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join("")),
+ "/planes":()=>pg("Planes (próximamente)",`<p>Diseño preparado. Los pagos aún no están implementados.</p><div class="grid">${PLANS.map(p=>`<div class="card"><h3>${p[0]}</h3><b>${p[1]}</b><p class="note">${p[2]}</p></div>`).join("")}</div>`),
+ "/admin":()=>pg("Proveedores y API keys",`<div class="demo" style="margin-bottom:14px">Sin backend ni autenticación todavía. Las claves de terceros se guardan solo en tu navegador (localStorage) y se usan desde la página de inicio.</div>
+ <div class="card" style="margin-bottom:14px"><h3>API keys de terceros (JSON con datos reales)</h3>
+ <dl><dt>JSON.pe token</dt><dd><input id="k_jsonpe" style="width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)" placeholder="Bearer token de json.pe" value="${esc(cfg("jsonpe"))}"></dd><dt>PlacApi key</dt><dd><input id="k_placapi" style="width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)" placeholder="x-api-key de placapi.com" value="${esc(cfg("placapi"))}"></dd></dl><button class="btn" id="savekeys" style="margin-top:10px">Guardar claves</button><p class="note" id="kmsg"></p></div>
+ <div class="grid">${Object.entries(FUENTES).map(([k,f])=>{const st=PROV_STATUS[k]||"sin consultar";const col=f.tipo==="apikey"?(st==="ok"?"ok":"warn"):f.tipo==="nooficial"?(st==="ok"?"ok":"bad"):"warn";return `<div class="card ${col}"><h3>${f.nombre}<span class="pill ${col}">${f.tipo==="apikey"?"API key":f.tipo==="nooficial"?"No oficial":f.tipo==="contrato"?"Contrato":"Manual"}</span></h3><dl><dt>Servicio</dt><dd>${f.servicio}</dd><dt>Acceso</dt><dd>${f.integracion}</dd><dt>Último intento</dt><dd>${st}</dd><dt>URL</dt><dd><a href="${f.url}" target="_blank" rel="noopener">${f.url}</a></dd></dl></div>`}).join("")}</div>
+ <h3 style="margin-top:22px">Para integración REAL con el Estado</h3><pre>1) SUNARP: solicitar "Web Services SUNARP" (SOAP/WSDL) ante la Zona Registral. Requiere contrato y credenciales. Es la unica via oficial automatizada.
+2) SAT / SUTRAN / PJ: sin API publica; webs con CAPTCHA. Opciones: convenio institucional, o verificacion manual enlazada (incluida en cada tarjeta).
+3) MTC: endpoint JSON no oficial (apps5.mineco.gob.pe/webservicessic). Funciona hasta que cambien o bloqueen; por eso va detras de las APIs de pago.
+4) Recomendado: mover las consultas a un backend propio (evita CORS, protege claves, agrega cache).</pre>
+ <h3 style="margin-top:22px">Arquitectura</h3><pre>frontend/   → componentes (Card, Ficha, Checklist, Docs, FuentesBox)
+backend/    → investigar(placa) agrega proveedores, alertas(), riesgo
+database/   → vehiculos, remates, expedientes, propietarios,
+              gravamenes, documentos, fotos, alertas, fuentes
+providers/  → DemoProvider (ejemplo)
+              JsonPeProvider / PlacApiProvider (API key, pago)
+              MtcProvider (no oficial, con fallback)
+              SUNARP/SAT/SUTRAN/PJ → manual o contrato (sin API publica)</pre>`)
+};
+const pg=(t,b)=>`<main><div class="wrap"><h1>${t}</h1>${b}</div></main>`;
+
+function route(){
+ const p=location.hash.slice(1)||"/";$("#app").innerHTML=(Pages[p]||Pages["/"])();
+ document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+p));
+ document.title=(p==="/"?"":"")+"RemateCheck – Investiga antes de ofertar";window.scrollTo(0,0);
+ const f=$("#f");if(f){f.onsubmit=async e=>{e.preventDefault();const r=await investigar($("#pl").value);$("#er").textContent=r.error||"";if(r.v){$("#res").innerHTML=Ficha(r.v);activarConsultasExternas(r.v.placa);$("#res").scrollIntoView({behavior:"smooth"})}};
+  document.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{$("#pl").value=b.dataset.p;f.requestSubmit()})}
+ if(p==="/admin"){const b=$("#savekeys");if(b)b.onclick=()=>{setCfg("jsonpe",$("#k_jsonpe").value.trim());setCfg("placapi",$("#k_placapi").value.trim());$("#kmsg").textContent="✅ Guardado en este navegador. Esta vista previa no utiliza claves ni realiza consultas externas.";PROV_STATUS.jsonpe=PROV_STATUS.placapi="sin consultar";}}
+}
+document.addEventListener("change",e=>{if(e.target.matches("[data-c]")){const all=[...document.querySelectorAll("[data-c]")],n=all.filter(x=>x.checked).length,pc=Math.round(n/all.length*100);$("#prog").textContent=pc+"% completado ("+n+" de "+all.length+")";$("#pbar").style.width=pc+"%"}});
+addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
